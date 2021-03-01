@@ -3,6 +3,10 @@ app.component('product-display', {
         premium: {
             type: Boolean,
             required: true
+        },
+        cart: {
+            type: Array,
+            required: true
         }
     },
     template:
@@ -44,6 +48,14 @@ app.component('product-display', {
                         :disabled="!inStock">
                             Add to Cart
                     </button>
+
+                    <button
+                        class="button"
+                        :class="{disabledButton: !inStock}"
+                        @click="removeFromCart"
+                        :disabled="!inStock">
+                            Remove from Cart
+                    </button>
                 </div>
             </div>
         </div>`,
@@ -72,13 +84,18 @@ app.component('product-display', {
                 }
             ],
             sizes: [38, 39, 40, 41, 42, 43, 44],
-            cart: 0,
         }
     },
     methods: {
         addToCart() {
-            this.cart++;
+            this.$emit('add-to-cart', this.variants[this.selectedVariant].id);
             this.variants[this.selectedVariant].quantity--;
+        },
+        removeFromCart() {
+            if (this.cart.length > 0) {
+                this.$emit('remove-from-cart', this.variants[this.selectedVariant].id);
+                this.variants[this.selectedVariant].quantity++;
+            }
         },
         updateVariant(index) {
             this.selectedVariant = index;
