@@ -22,7 +22,7 @@ const app = Vue.createApp({
                 }
             ],
             sizes: [38, 39, 40, 41, 42, 43, 44],
-            cart: 0
+            cart: 0,
         }
     },
     methods: {
