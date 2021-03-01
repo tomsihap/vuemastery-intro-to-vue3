@@ -33,6 +33,15 @@
                         {{ description }}<br>
                         <a :href="moreLink">More here</a>
                     </p>
+                    <ul>
+                        <li v-for="detail in details">{{ detail }}</li>
+                    </ul>
+                    <div v-for="variant in variants" :key="variant.id">{{ variant.color }}</div>
+                    <div>Available sizes:
+                        <span v-for="size, i in sizes">
+                            {{ size }}<span v-if="i != Object.keys(sizes).length -1">,&nbsp;</span>
+                        </span>
+                    </div>
                 </div>
             </div>
         </div>
