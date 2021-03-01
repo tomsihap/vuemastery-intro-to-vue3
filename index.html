@@ -25,12 +25,10 @@
                     <img :src="image" :alt="description" :class="[!inStock ? 'out-of-stock-img' : '']">
                 </div>
                 <div class="product-info">
-                    <h1>{{ product }}</h1>
-                    <p v-if="inventory > 10">In stock</p>
-                    <p v-else-if="inventory <= 10 && inventory > 0">Almost sold out!</p>
+                    <h1>{{ title }}<span v-show="onSale">&nbsp;- on sale !</span></h1>
+                    <p v-if="inStock > 10">In stock - {{inStock}} items left</p>
+                    <p v-else-if="inStock <= 10 && inStock > 0">Almost sold out!</p>
                     <p v-else>Out of stock</p>
-                    <p v-show="inStock">Stock is existing (hidden with display:none if false)</p>
-                    <p v-show="onSale">On sale !</p>
                     <p>
                         {{ description }}<br>
                         <a :href="moreLink">More here</a>
@@ -39,9 +37,9 @@
                         <li v-for="detail in details">{{ detail }}</li>
                     </ul>
                     <div
-                        v-for="variant in variants"
+                        v-for="variant, i in variants"
                         :key="variant.id"
-                        @mouseover="updateImage(variant.image)"
+                        @mouseover="updateVariant(i)"
                         class="color-circle"
                         :style="{ backgroundColor: variant.color }">
                     </div>
