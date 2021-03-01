@@ -4,7 +4,10 @@ const app = Vue.createApp({
             product: 'Socks',
             description: 'Good stuff',
             image: './assets/images/socks_green.jpg',
-            moreLink: 'http://www.example.com'
+            moreLink: 'http://www.example.com',
+            inStock: true,
+            inventory: 9,
+            onSale: true
         }
     }
 })
